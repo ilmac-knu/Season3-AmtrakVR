@@ -34,58 +34,49 @@ html,body{
     padding:12px 18px;
     border-radius:10px;
     font-size:18px;
+    line-height:1.5;
 }
 
-/* 기본 핫스팟 숨김 */
-
+/* Pannellum 기본 핫스팟 배경 제거 */
 .pnlm-hotspot-base{
     background:none !important;
     border:none !important;
 }
 
-/* 새 화살표 */
-
+/* 흰색 원형 바탕 + 검정 화살표 */
 .bigArrow{
-
-    width:80px;
-    height:80px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.95);
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    font-size:46px;
-
-    font-weight:bold;
-
-    color:#222;
-
-    box-shadow:0 0 20px rgba(0,0,0,.5);
-}
-
-/* 모바일 */
-
-@media(max-width:768px){
-
-.bigArrow{
-
     width:120px;
     height:120px;
-
-    font-size:64px;
+    border-radius:50%;
+    background:#ffffff;
+    color:#000000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:76px;
+    font-weight:900;
+    line-height:1;
+    box-shadow:0 0 18px rgba(0,0,0,.45);
+    border:2px solid rgba(0,0,0,.15);
 }
 
-.title-box{
+/* 모바일에서는 현재보다 더 크게 */
+@media(max-width:768px){
 
-font-size:14px;
-padding:8px 12px;
+    .bigArrow{
+        width:180px;
+        height:180px;
+        font-size:110px;
+        box-shadow:0 0 24px rgba(0,0,0,.55);
+        border:3px solid rgba(0,0,0,.18);
+    }
 
-}
+    .title-box{
+        font-size:14px;
+        padding:8px 12px;
+        top:12px;
+        left:12px;
+    }
 
 }
 
@@ -103,145 +94,144 @@ Season3 Amtrak VR<br>
 
 <script>
 
-var viewer=pannellum.viewer('panorama',{
+var viewer = pannellum.viewer('panorama', {
 
-"default":{
-
-"firstScene":"VR1",
-"sceneFadeDuration":1000,
-"autoLoad":true
-
+"default": {
+    "firstScene": "VR1",
+    "sceneFadeDuration": 1000,
+    "autoLoad": true,
+    "showControls": true,
+    "compass": false
 },
 
-"scenes":{
+"scenes": {
 
-"VR1":{
-
-"title":"VR1",
-
-"type":"equirectangular",
-
-"panorama":"images/VR1_platform.png",
-
-"hotSpots":[
-{
-"pitch":-6,
-"yaw":25,
-"cssClass":"bigArrow",
-"createTooltipFunc":hotspot,
-"createTooltipArgs":"↑",
-"type":"scene",
-"sceneId":"VR2"
-}
-]
+"VR1": {
+    "title": "VR1 — 플랫폼에서 본 암트랙 외관",
+    "type": "equirectangular",
+    "panorama": "images/VR1_platform.png",
+    "hotSpots": [
+        {
+            "pitch": -6,
+            "yaw": 25,
+            "type": "scene",
+            "text": "열차 탑승하기",
+            "sceneId": "VR2",
+            "cssClass": "bigArrow",
+            "createTooltipFunc": hotspot,
+            "createTooltipArgs": "↑"
+        }
+    ]
 },
 
-"VR2":{
-
-"type":"equirectangular",
-
-"panorama":"images/VR2_coach_entrance.png",
-
-"hotSpots":[
-
-{
-"pitch":-5,
-"yaw":0,
-"cssClass":"bigArrow",
-"createTooltipFunc":hotspot,
-"createTooltipArgs":"↑",
-"type":"scene",
-"sceneId":"VR3"
+"VR2": {
+    "title": "VR2 — Coachclass 입구 계단 앞",
+    "type": "equirectangular",
+    "panorama": "images/VR2_coach_entrance.png",
+    "hotSpots": [
+        {
+            "pitch": -5,
+            "yaw": 0,
+            "type": "scene",
+            "text": "계단 올라가기",
+            "sceneId": "VR3",
+            "cssClass": "bigArrow",
+            "createTooltipFunc": hotspot,
+            "createTooltipArgs": "↑"
+        },
+        {
+            "pitch": -8,
+            "yaw": 180,
+            "type": "scene",
+            "text": "플랫폼 돌아가기",
+            "sceneId": "VR1",
+            "cssClass": "bigArrow",
+            "createTooltipFunc": hotspot,
+            "createTooltipArgs": "↓"
+        }
+    ]
 },
 
-{
-"pitch":-8,
-"yaw":180,
-"cssClass":"bigArrow",
-"createTooltipFunc":hotspot,
-"createTooltipArgs":"↓",
-"type":"scene",
-"sceneId":"VR1"
-}
-
-]
-
+"VR3": {
+    "title": "VR3 — 계단 위 / 객실 출입문 앞",
+    "type": "equirectangular",
+    "panorama": "images/VR3_doorway.png",
+    "hotSpots": [
+        {
+            "pitch": 0,
+            "yaw": 0,
+            "type": "scene",
+            "text": "객실 들어가기",
+            "sceneId": "VR4",
+            "cssClass": "bigArrow",
+            "createTooltipFunc": hotspot,
+            "createTooltipArgs": "↑"
+        },
+        {
+            "pitch": -18,
+            "yaw": 180,
+            "type": "scene",
+            "text": "계단 내려가기",
+            "sceneId": "VR2",
+            "cssClass": "bigArrow",
+            "createTooltipFunc": hotspot,
+            "createTooltipArgs": "↓"
+        }
+    ]
 },
 
-"VR3":{
-
-"type":"equirectangular",
-
-"panorama":"images/VR3_doorway.png",
-
-"hotSpots":[
-
-{
-"pitch":0,
-"yaw":0,
-"cssClass":"bigArrow",
-"createTooltipFunc":hotspot,
-"createTooltipArgs":"↑",
-"type":"scene",
-"sceneId":"VR4"
-}
-
-]
-
+"VR4": {
+    "title": "VR4 — 객실 입구에서 바라본 객실",
+    "type": "equirectangular",
+    "panorama": "images/VR4_cabin.png",
+    "hotSpots": [
+        {
+            "pitch": -3,
+            "yaw": 8,
+            "type": "scene",
+            "text": "부부 좌석으로 이동",
+            "sceneId": "VR5",
+            "cssClass": "bigArrow",
+            "createTooltipFunc": hotspot,
+            "createTooltipArgs": "↑"
+        },
+        {
+            "pitch": -5,
+            "yaw": 180,
+            "type": "scene",
+            "text": "출입문으로 돌아가기",
+            "sceneId": "VR3",
+            "cssClass": "bigArrow",
+            "createTooltipFunc": hotspot,
+            "createTooltipArgs": "↓"
+        }
+    ]
 },
 
-"VR4":{
-
-"type":"equirectangular",
-
-"panorama":"images/VR4_cabin.png",
-
-"hotSpots":[
-
-{
-"pitch":-3,
-"yaw":8,
-"cssClass":"bigArrow",
-"createTooltipFunc":hotspot,
-"createTooltipArgs":"↑",
-"type":"scene",
-"sceneId":"VR5"
-}
-
-]
-
-},
-
-"VR5":{
-
-"type":"equirectangular",
-
-"panorama":"images/VR5_couple_seat.png",
-
-"hotSpots":[
-
-{
-"pitch":-5,
-"yaw":180,
-"cssClass":"bigArrow",
-"createTooltipFunc":hotspot,
-"createTooltipArgs":"↓",
-"type":"scene",
-"sceneId":"VR4"
-}
-
-]
-
+"VR5": {
+    "title": "VR5 — 부부 좌석 착석 장면",
+    "type": "equirectangular",
+    "panorama": "images/VR5_couple_seat.png",
+    "hotSpots": [
+        {
+            "pitch": -5,
+            "yaw": 180,
+            "type": "scene",
+            "text": "객실 입구로 돌아가기",
+            "sceneId": "VR4",
+            "cssClass": "bigArrow",
+            "createTooltipFunc": hotspot,
+            "createTooltipArgs": "↓"
+        }
+    ]
 }
 
 }
 
 });
 
-function hotspot(div,args){
-
-div.innerHTML=args;
-
+function hotspot(div, args){
+    div.innerHTML = args;
 }
 
 </script>
