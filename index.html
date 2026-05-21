@@ -34,6 +34,37 @@
       font-size: 18px;
       line-height: 1.5;
     }
+
+    /* 모바일 터치용 핫스팟 확대 */
+    .pnlm-hotspot-base {
+      width: 56px !important;
+      height: 56px !important;
+    }
+
+    .pnlm-tooltip span {
+      font-size: 17px !important;
+      padding: 8px 12px !important;
+      border-radius: 8px !important;
+    }
+
+    @media (max-width: 768px) {
+      .title-box {
+        font-size: 15px;
+        padding: 9px 13px;
+        top: 12px;
+        left: 12px;
+      }
+
+      .pnlm-hotspot-base {
+        width: 64px !important;
+        height: 64px !important;
+      }
+
+      .pnlm-tooltip span {
+        font-size: 18px !important;
+        padding: 10px 14px !important;
+      }
+    }
   </style>
 </head>
 
@@ -59,7 +90,7 @@
         "VR1": {
           "title": "VR1 — 플랫폼에서 본 암트랙 외관",
           "type": "equirectangular",
-          "panorama": "images/VR1_platform..png",
+          "panorama": "images/VR1_platform.png",
           "hotSpots": [
             {
               "pitch": -6,
