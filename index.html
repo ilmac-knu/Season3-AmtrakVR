@@ -11,13 +11,12 @@ href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
 
 <style>
 
-html, body{
+html,body{
     margin:0;
     width:100%;
     height:100%;
     overflow:hidden;
     font-family:"Malgun Gothic",sans-serif;
-    background:#000;
 }
 
 #panorama{
@@ -29,135 +28,115 @@ html, body{
     position:absolute;
     top:18px;
     left:18px;
-
     z-index:999;
-
-    background:rgba(0,0,0,.58);
-
+    background:rgba(0,0,0,.6);
     color:white;
-
     padding:12px 18px;
-
     border-radius:10px;
-
     font-size:18px;
-
-    line-height:1.5;
 }
 
-/* =======================
-   화살표 실제 크기 확대
-======================= */
+/* 기본 핫스팟 숨김 */
 
 .pnlm-hotspot-base{
-    transform:scale(2.0);
-    transform-origin:center center;
+    background:none !important;
+    border:none !important;
 }
 
-/* 핫스팟 설명창 */
+/* 새 화살표 */
 
-.pnlm-tooltip span{
+.bigArrow{
 
-    font-size:16px !important;
+    width:80px;
+    height:80px;
 
-    padding:8px 12px !important;
+    border-radius:50%;
 
-    border-radius:8px !important;
+    background:rgba(255,255,255,.95);
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size:46px;
+
+    font-weight:bold;
+
+    color:#222;
+
+    box-shadow:0 0 20px rgba(0,0,0,.5);
 }
 
+/* 모바일 */
 
-/* =======================
-   모바일
-======================= */
+@media(max-width:768px){
 
-@media (max-width:768px){
+.bigArrow{
+
+    width:120px;
+    height:120px;
+
+    font-size:64px;
+}
 
 .title-box{
 
-    font-size:15px;
+font-size:14px;
+padding:8px 12px;
 
-    padding:9px 13px;
-
-    top:12px;
-    left:12px;
-}
-
-/* 모바일에서는 약 2배~2.5배 */
-
-.pnlm-hotspot-base{
-
-    transform:scale(4.0);
-}
-
-.pnlm-tooltip span{
-
-    font-size:18px !important;
-
-    padding:10px 14px !important;
 }
 
 }
 
 </style>
-
 </head>
 
 <body>
 
 <div class="title-box">
-
 Season3 Amtrak VR<br>
 워싱턴 → 뉴욕 탑승 체험
-
 </div>
 
 <div id="panorama"></div>
 
 <script>
 
-pannellum.viewer('panorama',{
+var viewer=pannellum.viewer('panorama',{
 
 "default":{
 
-    "firstScene":"VR1",
-    "sceneFadeDuration":1000,
-    "autoLoad":true,
-    "showControls":true,
-    "compass":false
+"firstScene":"VR1",
+"sceneFadeDuration":1000,
+"autoLoad":true
+
 },
 
 "scenes":{
 
 "VR1":{
 
-"title":"VR1 — 플랫폼에서 본 암트랙 외관",
+"title":"VR1",
 
 "type":"equirectangular",
 
 "panorama":"images/VR1_platform.png",
 
 "hotSpots":[
-
 {
-
 "pitch":-6,
 "yaw":25,
-
+"cssClass":"bigArrow",
+"createTooltipFunc":hotspot,
+"createTooltipArgs":"↑",
 "type":"scene",
-
-"text":"열차 탑승하기",
-
 "sceneId":"VR2"
-
 }
-
 ]
-
 },
 
 "VR2":{
-
-"title":"VR2 — Coachclass 입구 계단 앞",
 
 "type":"equirectangular",
 
@@ -166,29 +145,23 @@ pannellum.viewer('panorama',{
 "hotSpots":[
 
 {
-
 "pitch":-5,
 "yaw":0,
-
+"cssClass":"bigArrow",
+"createTooltipFunc":hotspot,
+"createTooltipArgs":"↑",
 "type":"scene",
-
-"text":"계단 올라가기",
-
 "sceneId":"VR3"
-
 },
 
 {
-
 "pitch":-8,
 "yaw":180,
-
+"cssClass":"bigArrow",
+"createTooltipFunc":hotspot,
+"createTooltipArgs":"↓",
 "type":"scene",
-
-"text":"플랫폼 돌아가기",
-
 "sceneId":"VR1"
-
 }
 
 ]
@@ -197,8 +170,6 @@ pannellum.viewer('panorama',{
 
 "VR3":{
 
-"title":"VR3 — 계단 위 / 객실 출입문 앞",
-
 "type":"equirectangular",
 
 "panorama":"images/VR3_doorway.png",
@@ -206,29 +177,13 @@ pannellum.viewer('panorama',{
 "hotSpots":[
 
 {
-
 "pitch":0,
 "yaw":0,
-
+"cssClass":"bigArrow",
+"createTooltipFunc":hotspot,
+"createTooltipArgs":"↑",
 "type":"scene",
-
-"text":"객실 들어가기",
-
 "sceneId":"VR4"
-
-},
-
-{
-
-"pitch":-18,
-"yaw":180,
-
-"type":"scene",
-
-"text":"계단 내려가기",
-
-"sceneId":"VR2"
-
 }
 
 ]
@@ -237,8 +192,6 @@ pannellum.viewer('panorama',{
 
 "VR4":{
 
-"title":"VR4 — 객실 입구에서 바라본 객실",
-
 "type":"equirectangular",
 
 "panorama":"images/VR4_cabin.png",
@@ -246,29 +199,13 @@ pannellum.viewer('panorama',{
 "hotSpots":[
 
 {
-
 "pitch":-3,
 "yaw":8,
-
+"cssClass":"bigArrow",
+"createTooltipFunc":hotspot,
+"createTooltipArgs":"↑",
 "type":"scene",
-
-"text":"부부 좌석으로 이동",
-
 "sceneId":"VR5"
-
-},
-
-{
-
-"pitch":-5,
-"yaw":180,
-
-"type":"scene",
-
-"text":"출입문으로 돌아가기",
-
-"sceneId":"VR3"
-
 }
 
 ]
@@ -277,8 +214,6 @@ pannellum.viewer('panorama',{
 
 "VR5":{
 
-"title":"VR5 — 부부 좌석 착석 장면",
-
 "type":"equirectangular",
 
 "panorama":"images/VR5_couple_seat.png",
@@ -286,16 +221,13 @@ pannellum.viewer('panorama',{
 "hotSpots":[
 
 {
-
 "pitch":-5,
 "yaw":180,
-
+"cssClass":"bigArrow",
+"createTooltipFunc":hotspot,
+"createTooltipArgs":"↓",
 "type":"scene",
-
-"text":"객실 입구로 돌아가기",
-
 "sceneId":"VR4"
-
 }
 
 ]
@@ -305,6 +237,12 @@ pannellum.viewer('panorama',{
 }
 
 });
+
+function hotspot(div,args){
+
+div.innerHTML=args;
+
+}
 
 </script>
 
