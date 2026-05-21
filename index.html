@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Season3 Amtrak VR</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+  <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: "Malgun Gothic", sans-serif;
+      background: #000;
+    }
+
+    #panorama {
+      width: 100%;
+      height: 100vh;
+    }
+
+    .title-box {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.58);
+      color: white;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="title-box">
+    Season3 Amtrak VR<br>
+    워싱턴 → 뉴욕 탑승 체험
+  </div>
+
+  <div id="panorama"></div>
+
+  <script>
+    pannellum.viewer('panorama', {
+      "default": {
+        "firstScene": "VR1",
+        "sceneFadeDuration": 1000,
+        "autoLoad": true,
+        "showControls": true,
+        "compass": false
+      },
+
+      "scenes": {
+        "VR1": {
+          "title": "VR1 — 플랫폼에서 본 암트랙 외관",
+          "type": "equirectangular",
+          "panorama": "images/VR1_platform.jpg",
+          "hotSpots": [
+            {
+              "pitch": -6,
+              "yaw": 25,
+              "type": "scene",
+              "text": "열차 탑승하기",
+              "sceneId": "VR2"
+            }
+          ]
+        },
+
+        "VR2": {
+          "title": "VR2 — Coachclass 입구 계단 앞",
+          "type": "equirectangular",
+          "panorama": "images/VR2_coach_entrance.jpg",
+          "hotSpots": [
+            {
+              "pitch": -5,
+              "yaw": 0,
+              "type": "scene",
+              "text": "계단 올라가기",
+              "sceneId": "VR3"
+            },
+            {
+              "pitch": -8,
+              "yaw": 180,
+              "type": "scene",
+              "text": "플랫폼 돌아가기",
+              "sceneId": "VR1"
+            }
+          ]
+        },
+
+        "VR3": {
+          "title": "VR3 — 계단 위 / 객실 출입문 앞",
+          "type": "equirectangular",
+          "panorama": "images/VR3_doorway.jpg",
+          "hotSpots": [
+            {
+              "pitch": 0,
+              "yaw": 0,
+              "type": "scene",
+              "text": "객실 들어가기",
+              "sceneId": "VR4"
+            },
+            {
+              "pitch": -18,
+              "yaw": 180,
+              "type": "scene",
+              "text": "계단 내려가기",
+              "sceneId": "VR2"
+            }
+          ]
+        },
+
+        "VR4": {
+          "title": "VR4 — 객실 입구에서 바라본 객실",
+          "type": "equirectangular",
+          "panorama": "images/VR4_cabin.jpg",
+          "hotSpots": [
+            {
+              "pitch": -3,
+              "yaw": 8,
+              "type": "scene",
+              "text": "부부 좌석으로 이동",
+              "sceneId": "VR5"
+            },
+            {
+              "pitch": -5,
+              "yaw": 180,
+              "type": "scene",
+              "text": "출입문으로 돌아가기",
+              "sceneId": "VR3"
+            }
+          ]
+        },
+
+        "VR5": {
+          "title": "VR5 — 부부 좌석 착석 장면",
+          "type": "equirectangular",
+          "panorama": "images/VR5_couple_seat.jpg",
+          "hotSpots": [
+            {
+              "pitch": -5,
+              "yaw": 180,
+              "type": "scene",
+              "text": "객실 입구로 돌아가기",
+              "sceneId": "VR4"
+            }
+          ]
+        }
+      }
+    });
+  </script>
+</body>
+</html>
